@@ -1,0 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+
+public class VehicleDbContext : DbContext
+{
+    public VehicleDbContext(DbContextOptions<VehicleDbContext> options) : base(options) { }
+
+    public DbSet<Vehicle> Vehicles { get; set; }
+    public DbSet<Brand> Brands { get; set; }
+    public DbSet<Equipment> Equipments { get; set; }
+    public DbSet<VehicleEquipment> VehicleEquipments { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<VehicleEquipment>()
+            .HasKey(ve => new { ve.VehicleId, ve.EquipmentId });
+    }
+}

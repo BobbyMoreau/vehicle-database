@@ -1,0 +1,27 @@
+# .gitignore
+
+# Node
+node_modules/
+dist/
+.env
+
+# Logs
+logs/
+*.log
+
+# Vite
+.vite/
+
+# VSCode
+.vscode/
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Dotnet tools
+.config/dotnet-tools.json

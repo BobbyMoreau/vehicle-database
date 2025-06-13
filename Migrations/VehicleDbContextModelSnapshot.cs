@@ -22,7 +22,6 @@ namespace VehicleDatabase.Api.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -37,7 +36,6 @@ namespace VehicleDatabase.Api.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -55,15 +53,12 @@ namespace VehicleDatabase.Api.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LicensePlateNumber")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ModelName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("VIN")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

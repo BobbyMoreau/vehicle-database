@@ -16,7 +16,7 @@ namespace VehicleDatabase.Api.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -29,7 +29,7 @@ namespace VehicleDatabase.Api.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,9 +42,9 @@ namespace VehicleDatabase.Api.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    VIN = table.Column<string>(type: "TEXT", nullable: false),
-                    LicensePlateNumber = table.Column<string>(type: "TEXT", nullable: false),
-                    ModelName = table.Column<string>(type: "TEXT", nullable: false),
+                    VIN = table.Column<string>(type: "TEXT", nullable: true),
+                    LicensePlateNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    ModelName = table.Column<string>(type: "TEXT", nullable: true),
                     BrandId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace VehicleDatabase.Api.Migrations
 {
     [DbContext(typeof(VehicleDbContext))]
-    [Migration("20250613195110_AddVehicleModels")]
-    partial class AddVehicleModels
+    [Migration("20250613200857_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,6 @@ namespace VehicleDatabase.Api.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -40,7 +39,6 @@ namespace VehicleDatabase.Api.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -58,15 +56,12 @@ namespace VehicleDatabase.Api.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LicensePlateNumber")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ModelName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("VIN")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

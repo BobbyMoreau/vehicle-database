@@ -14,9 +14,9 @@ namespace VehicleDatabase.Api.Migrations
                 name: "Brands",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -27,9 +27,9 @@ namespace VehicleDatabase.Api.Migrations
                 name: "Equipments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -40,12 +40,12 @@ namespace VehicleDatabase.Api.Migrations
                 name: "Vehicles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    VIN = table.Column<string>(type: "TEXT", nullable: true),
-                    LicensePlateNumber = table.Column<string>(type: "TEXT", nullable: true),
-                    ModelName = table.Column<string>(type: "TEXT", nullable: true),
-                    BrandId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    VIN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LicensePlateNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ModelName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BrandId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -62,8 +62,8 @@ namespace VehicleDatabase.Api.Migrations
                 name: "VehicleEquipments",
                 columns: table => new
                 {
-                    VehicleId = table.Column<int>(type: "INTEGER", nullable: false),
-                    EquipmentId = table.Column<int>(type: "INTEGER", nullable: false)
+                    VehicleId = table.Column<int>(type: "int", nullable: false),
+                    EquipmentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

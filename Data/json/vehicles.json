@@ -1,0 +1,152 @@
+[
+  {
+      "VIN": "VIN00000000000001",
+      "LicensePlateNumber": "ABC001",
+      "ModelName": "XC60",
+      "BrandId": 1,
+      "Equipments": [
+          { "VehicleId": 1, "EquipmentId": 1 },
+          { "VehicleId": 1, "EquipmentId": 4 }
+      ]
+  },
+  {
+      "VIN": "VIN00000000000002",
+      "LicensePlateNumber": "ABC002",
+      "ModelName": "S60",
+      "BrandId": 1,
+      "Equipments": [
+          { "VehicleId": 2, "EquipmentId": 2 },
+          { "VehicleId": 2, "EquipmentId": 5 }
+      ]
+  },
+  {
+      "VIN": "VIN00000000000003",
+      "LicensePlateNumber": "ABC003",
+      "ModelName": "320i",
+      "BrandId": 2,
+      "Equipments": [
+          { "VehicleId": 3, "EquipmentId": 3 },
+          { "VehicleId": 3, "EquipmentId": 6 }
+      ]
+  },
+  {
+      "VIN": "VIN00000000000004",
+      "LicensePlateNumber": "ABC004",
+      "ModelName": "X5",
+      "BrandId": 2,
+      "Equipments": [
+          { "VehicleId": 4, "EquipmentId": 7 },
+          { "VehicleId": 4, "EquipmentId": 10 }
+      ]
+  },
+  {
+      "VIN": "VIN00000000000005",
+      "LicensePlateNumber": "ABC005",
+      "ModelName": "Corolla",
+      "BrandId": 3,
+      "Equipments": [
+          { "VehicleId": 5, "EquipmentId": 1 },
+          { "VehicleId": 5, "EquipmentId": 8 }
+      ]
+  },
+  {
+      "VIN": "VIN00000000000006",
+      "LicensePlateNumber": "ABC006",
+      "ModelName": "Camry",
+      "BrandId": 3,
+      "Equipments": [
+          { "VehicleId": 6, "EquipmentId": 4 },
+          { "VehicleId": 6, "EquipmentId": 9 }
+      ]
+  },
+  {
+      "VIN": "VIN00000000000007",
+      "LicensePlateNumber": "ABC007",
+      "ModelName": "Focus",
+      "BrandId": 4,
+      "Equipments": [
+          { "VehicleId": 7, "EquipmentId": 2 },
+          { "VehicleId": 7, "EquipmentId": 3 }
+      ]
+  },
+  {
+      "VIN": "VIN00000000000008",
+      "LicensePlateNumber": "ABC008",
+      "ModelName": "Fiesta",
+      "BrandId": 4,
+      "Equipments": [
+          { "VehicleId": 8, "EquipmentId": 6 },
+          { "VehicleId": 8, "EquipmentId": 8 }
+      ]
+  },
+  {
+      "VIN": "VIN00000000000009",
+      "LicensePlateNumber": "ABC009",
+      "ModelName": "A4",
+      "BrandId": 5,
+      "Equipments": [
+          { "VehicleId": 9, "EquipmentId": 1 },
+          { "VehicleId": 9, "EquipmentId": 5 }
+      ]
+  },
+  {
+      "VIN": "VIN00000000000010",
+      "LicensePlateNumber": "ABC010",
+      "ModelName": "Q5",
+      "BrandId": 5,
+      "Equipments": [
+          { "VehicleId": 10, "EquipmentId": 4 },
+          { "VehicleId": 10, "EquipmentId": 9 }
+      ]
+  },
+  {
+      "VIN": "VIN00000000000011",
+      "LicensePlateNumber": "ABC011",
+      "ModelName": "C-Class",
+      "BrandId": 6,
+      "Equipments": [
+          { "VehicleId": 11, "EquipmentId": 7 },
+          { "VehicleId": 11, "EquipmentId": 10 }
+      ]
+  },
+  {
+      "VIN": "VIN00000000000012",
+      "LicensePlateNumber": "ABC012",
+      "ModelName": "E-Class",
+      "BrandId": 6,
+      "Equipments": [
+          { "VehicleId": 12, "EquipmentId": 2 },
+          { "VehicleId": 12, "EquipmentId": 3 }
+      ]
+  },
+  {
+      "VIN": "VIN00000000000013",
+      "LicensePlateNumber": "ABC013",
+      "ModelName": "V90",
+      "BrandId": 1,
+      "Equipments": [
+          { "VehicleId": 13, "EquipmentId": 6 },
+          { "VehicleId": 13, "EquipmentId": 8 }
+      ]
+  },
+  {
+      "VIN": "VIN00000000000014",
+      "LicensePlateNumber": "ABC014",
+      "ModelName": "X1",
+      "BrandId": 2,
+      "Equipments": [
+          { "VehicleId": 14, "EquipmentId": 9 },
+          { "VehicleId": 14, "EquipmentId": 10 }
+      ]
+  },
+  {
+      "VIN": "VIN00000000000015",
+      "LicensePlateNumber": "ABC015",
+      "ModelName": "Yaris",
+      "BrandId": 3,
+      "Equipments": [
+          { "VehicleId": 15, "EquipmentId": 1 },
+          { "VehicleId": 15, "EquipmentId": 5 }
+      ]
+  }
+]

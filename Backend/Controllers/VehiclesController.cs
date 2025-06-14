@@ -26,6 +26,22 @@ namespace Vehiclesdatabase.api.Namespace
 
             return Ok(vehicles);
         }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Vehicle>> GetVehicle(int id)
+        {
+            var vehicle = await _context.Vehicles
+                .Include(v => v.Brand)
+                .Include(v => v.VehicleEquipments)
+                    .ThenInclude(ve => ve.Equipment)
+                .FirstOrDefaultAsync(v => v.Id == id);
+
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(vehicle);
+        }
 
         [HttpPost]
         public async Task<ActionResult<Vehicle>> CreateVehicle([FromBody] Vehicle vehicle)

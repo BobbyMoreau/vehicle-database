@@ -1,7 +1,8 @@
 using System.Text.Json;
+
 public class SeedData
 {
- private readonly JsonSerializerOptions _options = new JsonSerializerOptions
+    private readonly JsonSerializerOptions _options = new JsonSerializerOptions
     {
         PropertyNameCaseInsensitive = true
     };
@@ -39,11 +40,32 @@ public class SeedData
         if (context.Vehicles.Any()) return;
 
         var dataInJsonFile = await File.ReadAllTextAsync("Data/json/vehicles.json");
-        var vehicles = JsonSerializer.Deserialize<List<Vehicle>>(dataInJsonFile, _options);
+        var vehicles = JsonSerializer.Deserialize<List<VehicleSeedDto>>(dataInJsonFile, _options);
 
         if (vehicles != null && vehicles.Count > 0)
         {
-            await context.Vehicles.AddRangeAsync(vehicles);
+            foreach (var vehicleDto in vehicles)
+            {
+                var vehicle = new Vehicle
+                {
+                    VIN = vehicleDto.VIN,
+                    LicensePlateNumber = vehicleDto.LicensePlateNumber,
+                    ModelName = vehicleDto.ModelName,
+                    BrandId = vehicleDto.BrandId,
+                    VehicleEquipments = new List<VehicleEquipment>()
+                };
+
+                foreach (var equipmentId in vehicleDto.EquipmentIds)
+                {
+                    vehicle.VehicleEquipments.Add(new VehicleEquipment
+                    {
+                        EquipmentId = equipmentId
+                    });
+                }
+
+                await context.Vehicles.AddAsync(vehicle);
+            }
+
             await context.SaveChangesAsync();
         }
     }

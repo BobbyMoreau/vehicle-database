@@ -14,18 +14,39 @@ namespace Vehiclesdatabase.api.Namespace
         {
             _context = context;
         }
-
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles()
+         [HttpGet]
+        public async Task<ActionResult<List<VehicleDto>>> GetVehicles()
         {
             var vehicles = await _context.Vehicles
                 .Include(v => v.Brand)
                 .Include(v => v.VehicleEquipments)
                     .ThenInclude(ve => ve.Equipment)
-                .ToListAsync();
+                .Select(v => new VehicleDto
+                {
+                    Id = v.Id,
+                    ModelName = v.ModelName,
+                    BrandName = v.Brand.Name,
+                    Equipments = v.VehicleEquipments.Select(ve => new EquipmentDto
+                    {
+                        Id = ve.Equipment.Id,
+                        Name = ve.Equipment.Name
+                    }).ToList()
+                }).ToListAsync();
 
             return Ok(vehicles);
         }
+
+        // [HttpGet]
+        // public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles()
+        // {
+        //     var vehicles = await _context.Vehicles
+        //         .Include(v => v.Brand)
+        //         .Include(v => v.VehicleEquipments)
+        //             .ThenInclude(ve => ve.Equipment)
+        //         .ToListAsync();
+
+        //     return Ok(vehicles);
+        // }
         [HttpGet("{id}")]
         public async Task<ActionResult<Vehicle>> GetVehicle(int id)
         {

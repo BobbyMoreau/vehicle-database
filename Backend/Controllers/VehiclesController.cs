@@ -26,7 +26,7 @@ namespace Vehiclesdatabase.api.Namespace
 
             return Ok(vehicles);
         }
-        
+
         [HttpPost]
         public async Task<ActionResult<Vehicle>> CreateVehicle([FromBody] Vehicle vehicle)
         {
@@ -34,6 +34,35 @@ namespace Vehiclesdatabase.api.Namespace
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetVehicles), new { id = vehicle.Id }, vehicle);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateVehicle(int id, Vehicle vehicle)
+        {
+            if (id != vehicle.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(vehicle).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Vehicles.Any(v => v.Id == id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
     }
 

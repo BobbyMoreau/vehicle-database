@@ -1,6 +1,5 @@
 [
   {
-      "Id": 1,
       "VIN": "VIN00000000000001",
       "LicensePlateNumber": "ABC001",
       "ModelName": "XC60",
@@ -11,7 +10,6 @@
       ]
   },
   {
-      "Id": 2,
       "VIN": "VIN00000000000002",
       "LicensePlateNumber": "ABC002",
       "ModelName": "S60",
@@ -22,7 +20,6 @@
       ]
   },
   {
-      "Id": 3,
       "VIN": "VIN00000000000003",
       "LicensePlateNumber": "ABC003",
       "ModelName": "320i",
@@ -33,7 +30,6 @@
       ]
   },
   {
-      "Id": 4,
       "VIN": "VIN00000000000004",
       "LicensePlateNumber": "ABC004",
       "ModelName": "X5",
@@ -44,7 +40,6 @@
       ]
   },
   {
-      "Id": 5,
       "VIN": "VIN00000000000005",
       "LicensePlateNumber": "ABC005",
       "ModelName": "Corolla",
@@ -55,7 +50,6 @@
       ]
   },
   {
-      "Id": 6,
       "VIN": "VIN00000000000006",
       "LicensePlateNumber": "ABC006",
       "ModelName": "Camry",
@@ -66,7 +60,6 @@
       ]
   },
   {
-      "Id": 7,
       "VIN": "VIN00000000000007",
       "LicensePlateNumber": "ABC007",
       "ModelName": "Focus",
@@ -77,7 +70,6 @@
       ]
   },
   {
-      "Id": 8,
       "VIN": "VIN00000000000008",
       "LicensePlateNumber": "ABC008",
       "ModelName": "Fiesta",
@@ -88,7 +80,6 @@
       ]
   },
   {
-      "Id": 9,
       "VIN": "VIN00000000000009",
       "LicensePlateNumber": "ABC009",
       "ModelName": "A4",
@@ -99,7 +90,6 @@
       ]
   },
   {
-      "Id": 10,
       "VIN": "VIN00000000000010",
       "LicensePlateNumber": "ABC010",
       "ModelName": "Q5",
@@ -110,7 +100,6 @@
       ]
   },
   {
-      "Id": 11,
       "VIN": "VIN00000000000011",
       "LicensePlateNumber": "ABC011",
       "ModelName": "C-Class",
@@ -121,7 +110,6 @@
       ]
   },
   {
-      "Id": 12,
       "VIN": "VIN00000000000012",
       "LicensePlateNumber": "ABC012",
       "ModelName": "E-Class",
@@ -132,7 +120,6 @@
       ]
   },
   {
-      "Id": 13,
       "VIN": "VIN00000000000013",
       "LicensePlateNumber": "ABC013",
       "ModelName": "V90",
@@ -143,7 +130,6 @@
       ]
   },
   {
-      "Id": 14,
       "VIN": "VIN00000000000014",
       "LicensePlateNumber": "ABC014",
       "ModelName": "X1",
@@ -154,7 +140,6 @@
       ]
   },
   {
-      "Id": 15,
       "VIN": "VIN00000000000015",
       "LicensePlateNumber": "ABC015",
       "ModelName": "Yaris",

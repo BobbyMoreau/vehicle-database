@@ -10,7 +10,7 @@ namespace Vehiclesdatabase.api.Namespace
     {
         private readonly VehicleDbContext _context;
 
-        public VehiclesController(VehicleDbContext  context)
+        public VehiclesController(VehicleDbContext context)
         {
             _context = context;
         }
@@ -25,6 +25,15 @@ namespace Vehiclesdatabase.api.Namespace
                 .ToListAsync();
 
             return Ok(vehicles);
+        }
+        
+        [HttpPost]
+        public async Task<ActionResult<Vehicle>> CreateVehicle([FromBody] Vehicle vehicle)
+        {
+            _context.Vehicles.Add(vehicle);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetVehicles), new { id = vehicle.Id }, vehicle);
         }
     }
 

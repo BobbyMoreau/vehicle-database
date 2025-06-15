@@ -1,12 +1,13 @@
-import { Button, Container, Title } from '@mantine/core'
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import EditPage from './pages/EditPage';
 
-function App() {
+export default function App() {
   return (
-    <Container>
-      <Title order={1} align="center" mt="xl">Hello Mantine!</Title>
-      <Button mt="md" color="blue" radius="md">Click me</Button>
-    </Container>
-  )
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/edit/:id" element={<EditPage />} /> 
+        <Route path="/create" element={<EditPage />} /> 
+      </Routes>
+  );
 }
-
-export default App

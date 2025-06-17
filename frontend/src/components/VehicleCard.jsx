@@ -1,63 +1,26 @@
-import { IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler/icons-react';
-import { Badge, Button, Card, Center, Group, Text } from '@mantine/core';
-import classes from './FeaturesCard.module.css';
+import { Card, Group, Text, Stack } from "@mantine/core";
+import { IconCar } from "@tabler/icons-react";
 
-const mockdata = [
-  { label: '4 passengers', icon: IconUsers },
-  { label: '100 km/h in 4 seconds', icon: IconGauge },
-  { label: 'Automatic gearbox', icon: IconManualGearbox },
-  { label: 'Electric', icon: IconGasStation },
-];
-
-export function FeaturesCard() {
-  const features = mockdata.map((feature) => (
-    <Center key={feature.label}>
-      <feature.icon size={16} className={classes.icon} stroke={1.5} />
-      <Text size="xs">{feature.label}</Text>
-    </Center>
-  ));
-
+export default function VehicleCard({ vehicle, children }) {
   return (
-    <Card withBorder radius="md" className={classes.card}>
-      <Card.Section className={classes.imageSection}>
-      </Card.Section>
-
-      <Group justify="space-between" mt="md">
-        <div>
-          <Text fw={500}>Model S</Text>
-          <Text fz="xs" c="dimmed">
-            Free recharge at any station
+    <Card shadow="sm" radius="md" withBorder>
+      <Group position="apart" mb="xs" align="center">
+        <Group spacing="xs" align="center">
+          <IconCar size={24} />
+          <Text size="lg" weight={500}>
+            Model: {vehicle.modelName}
           </Text>
-        </div>
-        <Badge variant="outline">25% off</Badge>
-      </Group>
-
-      <Card.Section className={classes.section} mt="md">
-        <Text fz="sm" c="dimmed" className={classes.label}>
-          Basic configuration
+        </Group>
+        <Text size="sm" color="dimmed">
+          Brand: {vehicle.brandName}
         </Text>
-
-        <Group gap={8} mb={-8}>
-          {features}
-        </Group>
-      </Card.Section>
-
-      <Card.Section className={classes.section}>
-        <Group gap={30}>
-          <div>
-            <Text fz="xl" fw={700} style={{ lineHeight: 1 }}>
-              $168.00
-            </Text>
-            <Text fz="sm" c="dimmed" fw={500} style={{ lineHeight: 1 }} mt={3}>
-              per day
-            </Text>
-          </div>
-
-          <Button radius="xl" style={{ flex: 1 }}>
-            Edit Vehicle
-          </Button>
-        </Group>
-      </Card.Section>
+      </Group>
+      <Stack spacing="xs">
+        <Text size="sm" color="dimmed">
+          Equipment: {vehicle.equipments?.join(", ") || "No equipment"}
+        </Text>
+        {children}
+      </Stack>
     </Card>
   );
 }

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Vehiclesdatabase.api.Namespace
 {
@@ -8,53 +8,24 @@ namespace Vehiclesdatabase.api.Namespace
     [ApiController]
     public class VehiclesController : ControllerBase
     {
-        private readonly VehicleDbContext _context;
+        private readonly IVehicleService _vehicleService;
 
-        public VehiclesController(VehicleDbContext context)
+        public VehiclesController(IVehicleService vehicleService)
         {
-            _context = context;
+            _vehicleService = vehicleService;
         }
-         [HttpGet]
+
+        [HttpGet]
         public async Task<ActionResult<List<VehicleDto>>> GetVehicles()
         {
-            var vehicles = await _context.Vehicles
-                .Include(v => v.Brand)
-                .Include(v => v.VehicleEquipments)
-                    .ThenInclude(ve => ve.Equipment)
-                .Select(v => new VehicleDto
-                {
-                    Id = v.Id,
-                    ModelName = v.ModelName,
-                    BrandName = v.Brand.Name,
-                    Equipments = v.VehicleEquipments.Select(ve => new EquipmentDto
-                    {
-                        Id = ve.Equipment.Id,
-                        Name = ve.Equipment.Name
-                    }).ToList()
-                }).ToListAsync();
-
+            var vehicles = await _vehicleService.GetAllAsync();
             return Ok(vehicles);
         }
 
-        // [HttpGet]
-        // public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles()
-        // {
-        //     var vehicles = await _context.Vehicles
-        //         .Include(v => v.Brand)
-        //         .Include(v => v.VehicleEquipments)
-        //             .ThenInclude(ve => ve.Equipment)
-        //         .ToListAsync();
-
-        //     return Ok(vehicles);
-        // }
         [HttpGet("{id}")]
-        public async Task<ActionResult<Vehicle>> GetVehicle(int id)
+        public async Task<ActionResult<VehicleDto>> GetVehicle(int id)
         {
-            var vehicle = await _context.Vehicles
-                .Include(v => v.Brand)
-                .Include(v => v.VehicleEquipments)
-                    .ThenInclude(ve => ve.Equipment)
-                .FirstOrDefaultAsync(v => v.Id == id);
+            var vehicle = await _vehicleService.GetByIdAsync(id);
 
             if (vehicle == null)
             {
@@ -65,12 +36,10 @@ namespace Vehiclesdatabase.api.Namespace
         }
 
         [HttpPost]
-        public async Task<ActionResult<Vehicle>> CreateVehicle([FromBody] Vehicle vehicle)
+        public async Task<ActionResult<VehicleDto>> CreateVehicle([FromBody] Vehicle vehicle)
         {
-            _context.Vehicles.Add(vehicle);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetVehicles), new { id = vehicle.Id }, vehicle);
+            var createdVehicle = await _vehicleService.CreateAsync(vehicle);
+            return CreatedAtAction(nameof(GetVehicle), new { id = createdVehicle.Id }, createdVehicle);
         }
 
         [HttpPut("{id}")]
@@ -81,23 +50,7 @@ namespace Vehiclesdatabase.api.Namespace
                 return BadRequest();
             }
 
-            _context.Entry(vehicle).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Vehicles.Any(v => v.Id == id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _vehicleService.UpdateAsync(vehicle);
 
             return NoContent();
         }
@@ -105,16 +58,15 @@ namespace Vehiclesdatabase.api.Namespace
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVehicle(int id)
         {
-            var vehicle = await _context.Vehicles.FindAsync(id);
-            if (vehicle == null)
+            var existingVehicle = await _vehicleService.GetByIdAsync(id);
+            if (existingVehicle == null)
+            {
                 return NotFound();
+            }
 
-            _context.Vehicles.Remove(vehicle);
-            await _context.SaveChangesAsync();
+            await _vehicleService.DeleteAsync(id);
 
             return NoContent();
         }
     }
-
-    
 }

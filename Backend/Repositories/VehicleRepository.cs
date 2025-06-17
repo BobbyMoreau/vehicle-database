@@ -31,12 +31,20 @@ public class VehicleRepository : IVehicleRepository
     await _context.SaveChangesAsync();
     return vehicle;
   }
-  public async Task UpdateAsync(Vehicle vehicle)
+
+
+  public async Task UpdateAsync(Vehicle updatedVehicle)
   {
-    _context.Vehicles.Update(vehicle);
+    var vehicle = new Vehicle { Id = updatedVehicle.Id };
+
+    _context.Attach(vehicle);
+
+    vehicle.ModelName = updatedVehicle.ModelName;
+
+    _context.Entry(vehicle).Property(v => v.ModelName).IsModified = true;
+
     await _context.SaveChangesAsync();
   }
-
   public async Task DeleteAsync(int id)
   {
     var vehicle = await GetByIdAsync(id);

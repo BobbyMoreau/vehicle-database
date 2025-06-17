@@ -33,7 +33,7 @@ export default function EditPage() {
     setSaving(true);
     updateVehicle(vehicle.id, vehicle)
       .then(() => {
-        navigate(`/vehicles/${vehicle.id}`); // Redirect to detail page
+        navigate(`/vehicles/${vehicle.id}`); 
       })
       .catch(() => {
         setError("Failed to update vehicle.");
@@ -70,15 +70,6 @@ export default function EditPage() {
           value={vehicle.modelName}
           onChange={handleInputChange}
         />
-
-        <TextInput
-          label="Brand Name"
-          name="brandName"
-          value={vehicle.brandName}
-          onChange={handleInputChange}
-        />
-
-        {/* Lägg till fler fält om du vill redigera Equipments eller BrandId */}
 
         <Button loading={saving} onClick={handleSubmit}>
           Save

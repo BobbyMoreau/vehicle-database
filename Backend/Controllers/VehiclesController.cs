@@ -46,11 +46,16 @@ namespace Vehiclesdatabase.api.Namespace
         public async Task<IActionResult> UpdateVehicle(int id, Vehicle vehicle)
         {
             if (id != vehicle.Id)
-            {
                 return BadRequest();
-            }
 
-            await _vehicleService.UpdateAsync(vehicle);
+            try
+            {
+                await _vehicleService.UpdateAsync(vehicle);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
 
             return NoContent();
         }

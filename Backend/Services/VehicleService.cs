@@ -19,7 +19,6 @@ public class VehicleService : IVehicleService
     public async Task<IEnumerable<VehicleDto>> GetAllAsync()
     {
         var vehicles = await _vehicleRepository.GetAllAsync();
-        Console.WriteLine("I AM IN THE SERVICE");
         return vehicles.Select(v => MapToDto(v));
     }
 

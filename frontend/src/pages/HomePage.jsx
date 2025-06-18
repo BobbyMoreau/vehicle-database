@@ -15,7 +15,6 @@ export default function HomePage() {
   const [selectedEquipments, setSelectedEquipments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const brandNames = brands.map(b => b.name);
 
   const handleSelectedEquipmentsChange = (event) => {
     const { name, checked } = event.target;
@@ -101,33 +100,61 @@ export default function HomePage() {
 
   return (
     <Container size="sm" py="md">
-      <Text align="center" size="xl" weight={700} mb="md">
-        Vehicles
-          </Text>
+  <Text align="center" size="xl" weight={700} mb="md">
+    Vehicles
+  </Text>
 
-      <VehicleList vehicles={vehicles} />
+  <VehicleList vehicles={vehicles} />
 
-      <input onChange={(e) => setModelName(e.target.value)} />
-      
-      <NativeSelect
-        value={brandValue}
-        onChange={(event) => setBrandValue(event.currentTarget.value)}
-        data={brandNames}
-      />
+  <hr />
 
-      <ul style={{ listStyle: 'none'}}>
-        {equipments.map(e =>
-          <li key={e.name}>
-            <input onChange={handleSelectedEquipmentsChange} type="checkbox" id={e.name} name={e.name} value={e.name} />{' '}
-            <label htmlFor={e.name}>{e.name}</label>
-          </li>
-        )}
-      </ul>
+  <div className="form-group">
+    <span className="label-text">ModelName:</span>
+    <input
+      type="text"
+      value={modelName}
+      onChange={(e) => setModelName(e.target.value)}
+    />
+  </div>
 
-      <Button mt="md" onClick={() => handleAddNewVehicle(modelName, brandValue, selectedEquipments)}>
-        Add New Vehicle
-      </Button>
-        
-      </Container>
+  <div className="form-group">
+    <span className="label-text">Choose Brand:</span>
+    <select
+      value={brandValue}
+      onChange={(event) => setBrandValue(event.target.value)}
+    >
+      <option value="">-- Choose Brand --</option>
+      {brands.map((b) => (
+        <option key={b.id} value={b.name}>
+          {b.name}
+        </option>
+      ))}
+    </select>
+  </div>
+
+  <div className="form-group">
+    <span className="label-text">Equipments:</span>
+    <ul className="checkbox-list">
+      {equipments.map((e) => (
+        <li key={e.name}>
+          <input
+            type="checkbox"
+            id={e.name}
+            name={e.name}
+            value={e.name}
+            onChange={handleSelectedEquipmentsChange}
+            checked={selectedEquipments.includes(e.name)}
+          />
+          <label htmlFor={e.name}>{e.name}</label>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <Button mt="md" onClick={() => handleAddNewVehicle(modelName, brandValue, selectedEquipments)}>
+    Add New Vehicle
+  </Button>
+</Container>
+
   );
 }

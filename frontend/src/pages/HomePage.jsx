@@ -24,7 +24,7 @@ export default function HomePage() {
     );
   };
 
-  const handleAddNewVehicle = (modelName, brandValue, selectedEquipments) => {
+  const handleAddNewVehicle = async (modelName, brandValue, selectedEquipments) => {
     const brandId = brands.find(b => b.name === brandValue)?.id;
     const equipmentIds = equipments
       .filter(e => selectedEquipments.includes(e.name))
@@ -39,7 +39,7 @@ export default function HomePage() {
     console.log(newVehicle)
 
     try {
-      const response = createVehicle(newVehicle);
+      const response = await createVehicle(newVehicle);
       console.log('Vehicle created:', response?.data);
       setVehicles(prev => [...prev, response.data]); 
       setModelName('');

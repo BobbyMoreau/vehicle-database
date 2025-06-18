@@ -5,8 +5,8 @@ import VehicleList from "../components/VehicleList";
 
 export default function HomePage() {
   const [vehicles, setVehicles] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
   useEffect(() => {
     getVehicles()
@@ -36,11 +36,21 @@ export default function HomePage() {
       </Container>
     );
 
+    const uniqueBrands = vehicles.reduce((acc, v) => {
+      if (!acc.some(b => b.brandId === v.brandId)) {
+        acc.push(v);
+      }
+      return acc;
+    }, []);
+
   return (
     <Container size="sm" py="md">
       <Text align="center" size="xl" weight={700} mb="md">
         Vehicles
-      </Text>
+          </Text>
+          <ul>
+            {uniqueBrands.map(b => <li key={b.brandId}>{b.brandName}</li>)}
+      </ul>
       <VehicleList vehicles={vehicles} onAddNew={() => alert("Add new clicked")} />
     </Container>
   );

@@ -44,8 +44,9 @@ public class VehicleService : IVehicleService
         {
             Id = vehicle.Id,
             ModelName = vehicle.ModelName,
-            BrandName = vehicle.Brand?.Name,
-            Equipments = vehicle.VehicleEquipments?
+            BrandId = vehicle.Brand.Id,
+            BrandName = vehicle.Brand.Name,
+           Equipments = vehicle.VehicleEquipments?
                         .Select(ve => ve.Equipment?.Name)
                         .Where(name => name != null)
                         .ToList()

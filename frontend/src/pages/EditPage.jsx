@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, TextInput, Button, Loader, Text, Center, Stack } from "@mantine/core";
-import { getVehicleById, updateVehicle } from "../api/vehicleApi";
+import { getVehicleById, updateVehicle, deleteVehicle } from "../api/vehicleApi";
 
 export default function EditPage() {
   const { id } = useParams();
@@ -29,11 +29,22 @@ export default function EditPage() {
     setVehicle((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = () => {
+  const handleSave = () => {
     setSaving(true);
     updateVehicle(vehicle.id, vehicle)
       .then(() => {
         navigate(`/vehicles/${vehicle.id}`); 
+      })
+      .catch(() => {
+        setError("Failed to update vehicle.");
+        setSaving(false);
+      });
+  };
+
+  const handleDelete = () => {
+    deleteVehicle(vehicle.id, vehicle)
+      .then(() => {
+        navigate("/"); 
       })
       .catch(() => {
         setError("Failed to update vehicle.");
@@ -71,8 +82,11 @@ export default function EditPage() {
           onChange={handleInputChange}
         />
 
-        <Button loading={saving} onClick={handleSubmit}>
+        <Button loading={saving} onClick={handleSave}>
           Save
+        </Button>
+        <Button loading={saving} onClick={handleDelete}>
+          Delete vehicle
         </Button>
       </Stack>
     </Container>

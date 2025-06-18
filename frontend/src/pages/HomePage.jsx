@@ -15,7 +15,7 @@ export default function HomePage() {
         setLoading(false);
       })
       .catch(() => {
-        setError("Kunde inte hämta fordon.");
+        setError("Could not fetch vehicle.");
         setLoading(false);
       });
   }, []);

@@ -43,6 +43,8 @@ public class VehicleService : IVehicleService
         return new VehicleDto
         {
             Id = vehicle.Id,
+            VIN = vehicle.VIN,
+            LicensePlateNumber = vehicle.LicensePlateNumber,
             ModelName = vehicle.ModelName,
             BrandId = vehicle.Brand?.Id ?? 0,
             BrandName = vehicle.Brand?.Name,

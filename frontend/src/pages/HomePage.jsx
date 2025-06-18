@@ -15,6 +15,9 @@ export default function HomePage() {
   const [selectedEquipments, setSelectedEquipments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [vin, setVin] = useState('');
+  const [licensePlate, setLicensePlate] = useState('');
+
 
   const handleSelectedEquipmentsChange = (event) => {
     const { name, checked } = event.target;
@@ -23,24 +26,28 @@ export default function HomePage() {
     );
   };
 
-  const handleAddNewVehicle = async (modelName, brandValue, selectedEquipments) => {
+  const handleAddNewVehicle = async () => {
     const brandId = brands.find(b => b.name === brandValue)?.id;
     const equipmentIds = equipments
       .filter(e => selectedEquipments.includes(e.name))
       .map(e => e.id);
-
+  
     const newVehicle = {
+      vin: vin,
+      licensePlateNumber: licensePlate,
       name: modelName,
       brandId: brandId,
       equipmentIds: equipmentIds
     }
-
-    console.log(newVehicle)
-
+  
+    console.log(newVehicle);
+  
     try {
       const response = await createVehicle(newVehicle);
       console.log('Vehicle created:', response?.data);
       setVehicles(prev => [...prev, response.data]); 
+      setVin('');
+      setLicensePlate('');
       setModelName('');
       setBrandValue('');
       setSelectedEquipments([]);
@@ -115,7 +122,24 @@ export default function HomePage() {
       value={modelName}
       onChange={(e) => setModelName(e.target.value)}
     />
-  </div>
+      </div>
+      <div className="form-group">
+  <span className="label-text">VIN:</span>
+  <input
+    type="text"
+    value={vin}
+    onChange={(e) => setVin(e.target.value)}
+  />
+</div>
+
+<div className="form-group">
+  <span className="label-text">License Plate Number:</span>
+  <input
+    type="text"
+    value={licensePlate}
+    onChange={(e) => setLicensePlate(e.target.value)}
+  />
+</div>
 
   <div className="form-group">
     <span className="label-text">Choose Brand:</span>
@@ -151,7 +175,7 @@ export default function HomePage() {
     </ul>
   </div>
 
-  <Button mt="md" onClick={() => handleAddNewVehicle(modelName, brandValue, selectedEquipments)}>
+  <Button mt="md" onClick={handleAddNewVehicle}>
     Add New Vehicle
   </Button>
 </Container>

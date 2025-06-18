@@ -43,6 +43,8 @@ namespace Vehiclesdatabase.api.Namespace
 
             var vehicle = new Vehicle
             {
+                VIN = dto.VIN,
+                LicensePlateNumber = dto.LicensePlateNumber,
                 ModelName = dto.Name,
                 BrandId = dto.BrandId,
                 VehicleEquipments = dto.EquipmentIds.Select(equipmentId => new VehicleEquipment

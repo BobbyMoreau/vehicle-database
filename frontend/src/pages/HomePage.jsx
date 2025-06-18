@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Container, Loader, Text, Center } from "@mantine/core";
 import { getVehicles } from "../api/vehicleApi";
+import { getBrands } from "../api/brandApi";
 import VehicleList from "../components/VehicleList";
 
 export default function HomePage() {
   const [vehicles, setVehicles] = useState([]);
+  const [brands, setBrands] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -16,6 +18,16 @@ export default function HomePage() {
       })
       .catch(() => {
         setError("Could not fetch vehicle.");
+        setLoading(false);
+      });
+    
+      getBrands()
+      .then((res) => {
+        setBrands(res.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setError("Could not fetch brands.");
         setLoading(false);
       });
   }, []);
@@ -36,20 +48,13 @@ export default function HomePage() {
       </Container>
     );
 
-    const uniqueBrands = vehicles.reduce((acc, v) => {
-      if (!acc.some(b => b.brandId === v.brandId)) {
-        acc.push(v);
-      }
-      return acc;
-    }, []);
-
   return (
     <Container size="sm" py="md">
       <Text align="center" size="xl" weight={700} mb="md">
         Vehicles
           </Text>
           <ul>
-            {uniqueBrands.map(b => <li key={b.brandId}>{b.brandName}</li>)}
+            {brands.map(b => <li key={b.brandId}>{b.name}</li>)}
       </ul>
       <VehicleList vehicles={vehicles} onAddNew={() => alert("Add new clicked")} />
     </Container>

@@ -22,11 +22,11 @@ public class VehicleService : IVehicleService
         return vehicles.Select(v => MapToDto(v));
     }
 
-    public async Task<VehicleDto> CreateAsync(Vehicle vehicle)
-    {
-        var createdVehicle = await _vehicleRepository.CreateAsync(vehicle);
-        return MapToDto(createdVehicle);
-    }
+  public async Task<VehicleDto> CreateAsync(Vehicle vehicle)
+{
+    var createdVehicle = await _vehicleRepository.CreateAsync(vehicle);
+    return MapToDto(createdVehicle);
+}
 
     public async Task UpdateAsync(Vehicle vehicle)
     {
@@ -38,14 +38,14 @@ public class VehicleService : IVehicleService
         await _vehicleRepository.DeleteAsync(id);
     }
 
-   private VehicleDto MapToDto(Vehicle vehicle)
+   public VehicleDto MapToDto(Vehicle vehicle)
     {
         return new VehicleDto
         {
             Id = vehicle.Id,
             ModelName = vehicle.ModelName,
-            BrandId = vehicle.Brand.Id,
-            BrandName = vehicle.Brand.Name,
+            BrandId = vehicle.Brand?.Id ?? 0,
+            BrandName = vehicle.Brand?.Name,
            Equipments = vehicle.VehicleEquipments?
                         .Select(ve => ve.Equipment?.Name)
                         .Where(name => name != null)

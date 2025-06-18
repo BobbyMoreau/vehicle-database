@@ -27,10 +27,16 @@ public class VehicleRepository : IVehicleRepository
   }
   public async Task<Vehicle> CreateAsync(Vehicle vehicle)
   {
-    _context.Vehicles.Add(vehicle);
-    await _context.SaveChangesAsync();
-    return vehicle;
+      _context.Vehicles.Add(vehicle);
+      await _context.SaveChangesAsync();
+
+      return await _context.Vehicles
+          .Include(v => v.Brand)
+          .Include(v => v.VehicleEquipments)
+              .ThenInclude(ve => ve.Equipment)
+          .FirstOrDefaultAsync(v => v.Id == vehicle.Id);
   }
+
 
 
   public async Task UpdateAsync(Vehicle updatedVehicle)

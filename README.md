@@ -6,6 +6,20 @@ This is a vehicle management application built with **.NET 8 (LTS)** for the bac
 
 The goal is to manage a vehicle database with functionality to create, view, edit, and delete vehicles.
 
+Absolut! Här är ett förslag på hur du kan skriva det med lite mer glädje, tydlighet och "✨Ta-DA✨"-känsla, inklusive stjärnor och bättre URL-beskrivning:
+
+---
+
+## ✨ Endpoints You Care About ✨
+
+* **⭐ `/`**  -  The homepage!  
+  Here you'll find the list of all vehicles and a handy **"Create New Vehicle"** form right on the page.
+
+* **⭐ `/vehicles/:id/edit`**  -  The edit page  
+  On this page, you can **edit** or **delete** a vehicle.
+
+---
+
 ### Technology Choices
 
 * **.NET 8**: Chosen for its Long-Term Support (LTS) and modern capabilities.

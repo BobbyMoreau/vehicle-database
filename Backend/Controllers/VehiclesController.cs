@@ -36,21 +36,44 @@ namespace Vehiclesdatabase.api.Namespace
         }
 
         [HttpPost]
-        public async Task<ActionResult<VehicleDto>> CreateVehicle([FromBody] Vehicle vehicle)
+        public async Task<IActionResult> CreateVehicle([FromBody] CreateVehicleDto dto)
         {
-            var createdVehicle = await _vehicleService.CreateAsync(vehicle);
-            return CreatedAtAction(nameof(GetVehicle), new { id = createdVehicle.Id }, createdVehicle);
+            if (dto == null)
+                return BadRequest();
+
+            var vehicle = new Vehicle
+            {
+                VIN = dto.VIN,
+                LicensePlateNumber = dto.LicensePlateNumber,
+                ModelName = dto.Name,
+                BrandId = dto.BrandId,
+                VehicleEquipments = dto.EquipmentIds.Select(equipmentId => new VehicleEquipment
+                {
+                    EquipmentId = equipmentId
+                }).ToList()
+            };
+
+            var createdVehicleDto = await _vehicleService.CreateAsync(vehicle);
+            return CreatedAtAction(nameof(GetVehicle), new { id = createdVehicleDto.Id }, createdVehicleDto);
+
         }
+
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateVehicle(int id, Vehicle vehicle)
         {
             if (id != vehicle.Id)
-            {
                 return BadRequest();
-            }
 
-            await _vehicleService.UpdateAsync(vehicle);
+            try
+            {
+                await _vehicleService.UpdateAsync(vehicle);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
 
             return NoContent();
         }

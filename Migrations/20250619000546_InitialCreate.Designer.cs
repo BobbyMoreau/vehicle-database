@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace VehicleDatabase.Api.Migrations
 {
     [DbContext(typeof(VehicleDbContext))]
-    [Migration("20250614104510_InitialCreate")]
+    [Migration("20250619000546_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

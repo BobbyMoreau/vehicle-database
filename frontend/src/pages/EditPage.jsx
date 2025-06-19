@@ -1,7 +1,17 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Container, TextInput, Button, Loader, Text, Center, Stack } from "@mantine/core";
-import { getVehicleById, updateVehicle } from "../api/vehicleApi";
+import {
+  Container,
+  TextInput,
+  Button,
+  Loader,
+  Text,
+  Center,
+  Stack,
+  Group,
+  Modal,
+} from "@mantine/core";
+import { getVehicleById, updateVehicle, deleteVehicle } from "../api/vehicleApi";
 
 export default function EditPage() {
   const { id } = useParams();
@@ -11,6 +21,7 @@ export default function EditPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   useEffect(() => {
     getVehicleById(id)
@@ -29,14 +40,26 @@ export default function EditPage() {
     setVehicle((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = () => {
+  const handleSave = () => {
     setSaving(true);
     updateVehicle(vehicle.id, vehicle)
       .then(() => {
-        navigate(`/vehicles/${vehicle.id}`); // Redirect to detail page
+        navigate(`/vehicles/${vehicle.id}`);
       })
       .catch(() => {
         setError("Failed to update vehicle.");
+        setSaving(false);
+      });
+  };
+
+  const handleDelete = () => {
+    setSaving(true);
+    deleteVehicle(vehicle.id, vehicle)
+      .then(() => {
+        navigate("/");
+      })
+      .catch(() => {
+        setError("Failed to delete vehicle.");
         setSaving(false);
       });
   };
@@ -59,30 +82,47 @@ export default function EditPage() {
 
   return (
     <Container size="sm" py="md">
-      <Stack spacing="md">
-        <Text size="xl" weight={700}>
+      <Stack spacing="lg">
+        <Text size="2xl" weight={700} align="center" mb="md">
           Edit Vehicle
         </Text>
 
         <TextInput
-          label="Model Name"
-          name="modelName"
-          value={vehicle.modelName}
-          onChange={handleInputChange}
-        />
+        label="Model Name"
+        name="modelName"
+        value={vehicle.modelName}
+        onChange={handleInputChange}
+        placeholder="Enter model name"
+        required
+        mb="md"           
+      />
 
-        <TextInput
-          label="Brand Name"
-          name="brandName"
-          value={vehicle.brandName}
-          onChange={handleInputChange}
-        />
-
-        {/* Lägg till fler fält om du vill redigera Equipments eller BrandId */}
-
-        <Button loading={saving} onClick={handleSubmit}>
-          Save
+      <Group position="apart" mt="xl">  
+        <Button color="red" variant="outline" onClick={() => setDeleteModalOpen(true)} loading={saving}>
+          Delete vehicle
         </Button>
+
+        <Button onClick={handleSave} loading={saving}>
+          Save Changes
+        </Button>
+      </Group>
+
+        <Modal
+          opened={deleteModalOpen}
+          onClose={() => setDeleteModalOpen(false)}
+          title="Confirm Delete"
+          centered
+        >
+          <Text>Are you sure you want to delete this vehicle?</Text>
+          <Group position="right" mt="md">
+            <Button variant="default" onClick={() => setDeleteModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button color="red" onClick={handleDelete} loading={saving}>
+              Delete
+            </Button>
+          </Group>
+        </Modal>
       </Stack>
     </Container>
   );

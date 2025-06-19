@@ -27,16 +27,30 @@ public class VehicleRepository : IVehicleRepository
   }
   public async Task<Vehicle> CreateAsync(Vehicle vehicle)
   {
-    _context.Vehicles.Add(vehicle);
-    await _context.SaveChangesAsync();
-    return vehicle;
-  }
-  public async Task UpdateAsync(Vehicle vehicle)
-  {
-    _context.Vehicles.Update(vehicle);
-    await _context.SaveChangesAsync();
+      _context.Vehicles.Add(vehicle);
+      await _context.SaveChangesAsync();
+
+      return await _context.Vehicles
+          .Include(v => v.Brand)
+          .Include(v => v.VehicleEquipments)
+              .ThenInclude(ve => ve.Equipment)
+          .FirstOrDefaultAsync(v => v.Id == vehicle.Id);
   }
 
+
+
+  public async Task UpdateAsync(Vehicle updatedVehicle)
+  {
+    var vehicle = new Vehicle { Id = updatedVehicle.Id };
+
+    _context.Attach(vehicle);
+
+    vehicle.ModelName = updatedVehicle.ModelName;
+
+    _context.Entry(vehicle).Property(v => v.ModelName).IsModified = true;
+
+    await _context.SaveChangesAsync();
+  }
   public async Task DeleteAsync(int id)
   {
     var vehicle = await GetByIdAsync(id);

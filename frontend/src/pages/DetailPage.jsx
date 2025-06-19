@@ -19,7 +19,7 @@ export default function VehicleDetail() {
         setLoading(false);
       })
       .catch(() => {
-        setError("Not able to fetch vehicle.");
+        setError("Could not fetch vehicle.");
         setLoading(false);
       });
   }, [id]);

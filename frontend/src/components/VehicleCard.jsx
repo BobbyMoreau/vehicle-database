@@ -18,7 +18,7 @@ export default function VehicleCard({ vehicle, children }) {
           VIN: {vehicle.vin}
         </Text>
         <Text size="sm" color="dimmed">
-          Licensplate: {vehicle.licensePlate}
+          Licensplate: {vehicle.licensePlateNumber}
         </Text>
       </Group>
       <Stack spacing="xs">

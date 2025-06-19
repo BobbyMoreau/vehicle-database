@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 public class VehicleDbContext : DbContext
 {
     public VehicleDbContext(DbContextOptions<VehicleDbContext> options) : base(options) { }
-
     public DbSet<Vehicle> Vehicles { get; set; }
     public DbSet<Brand> Brands { get; set; }
     public DbSet<Equipment> Equipments { get; set; }

@@ -10,10 +10,10 @@ public class EquipmentService : IEquipmentService
     {
         var equipments = await _equipmentRepository.GetAllAsync();
         return equipments.Select(b => new EquipmentDto
-    {
+        {
         Id = b.Id,
         Name = b.Name
-    });
+        });
     }
 
 }

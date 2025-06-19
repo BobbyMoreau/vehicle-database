@@ -6,14 +6,14 @@ public class BrandService : IBrandService
     _brandRepository = brandRepository;
   }
 
-    public async Task<IEnumerable<BrandDto>> GetAllAsync()
-    {
-        var brands = await _brandRepository.GetAllAsync();
-        return brands.Select(b => new BrandDto
+  public async Task<IEnumerable<BrandDto>> GetAllAsync()
+  {
+    var brands = await _brandRepository.GetAllAsync();
+    return brands.Select(b => new BrandDto
     {
         Id = b.Id,
         Name = b.Name
     });
-    }
+}
 
 }

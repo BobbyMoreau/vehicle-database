@@ -1,11 +1,11 @@
 public class VehicleService : IVehicleService
 {
-  private readonly IVehicleRepository _vehicleRepository;
-  public VehicleService(IVehicleRepository vehicleRepository)
-  {
-    _vehicleRepository = vehicleRepository;
-  }
-  public async Task<VehicleDto> GetByIdAsync(int id)
+    private readonly IVehicleRepository _vehicleRepository;
+    public VehicleService(IVehicleRepository vehicleRepository)
+    {
+        _vehicleRepository = vehicleRepository;
+    }
+    public async Task<VehicleDto> GetByIdAsync(int id)
     {
         var vehicle = await _vehicleRepository.GetByIdAsync(id);
         if (vehicle == null)
@@ -22,11 +22,11 @@ public class VehicleService : IVehicleService
         return vehicles.Select(v => MapToDto(v));
     }
 
-  public async Task<VehicleDto> CreateAsync(Vehicle vehicle)
-{
-    var createdVehicle = await _vehicleRepository.CreateAsync(vehicle);
-    return MapToDto(createdVehicle);
-}
+    public async Task<VehicleDto> CreateAsync(Vehicle vehicle)
+    {
+        var createdVehicle = await _vehicleRepository.CreateAsync(vehicle);
+        return MapToDto(createdVehicle);
+    }
 
     public async Task UpdateAsync(Vehicle vehicle)
     {
